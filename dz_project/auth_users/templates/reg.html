@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz.projects</title>
+    <link rel="stylesheet" href="{% static 'reg.css' %}">
+    <!-- <link rel="icon" href="{% static 'window/logo.png' %}" type="image/gif" sizes="30x30"> -->
+</head>
+<body>
+    <div class="box">
+        <div class="form-group">
+            <a href="">Sign up with Google</a>
+            <a href="">Sign up with Github</a>
+            <a href="{% url 'register' %}">Sign up with email</a>
+        </div>
+        <div class="login">
+            <h3>Already have an account?</h3>
+            <a href="{% url 'login' %}">Sign in</a>
+        </div>
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>

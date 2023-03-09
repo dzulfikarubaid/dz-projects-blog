@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz.projects</title>
+    <link rel="stylesheet" href="{% static 'window/blog.css' %}">
+    <link rel="icon" href="{% static 'window/logo.png' %}" type="image/gif" sizes="30x30">
+</head>
+<body>
+    <div class="box">
+        <section>
+            <article>
+                <p>{{ post.author }} - {{ post.first_name}} {{ post.last_name }}</p>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body|safe }}</p>
+                <p>{{ post.post_date }}</p>
+                {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                    <a href="{% url 'update_post' post.pk %}">Edit</a>
+                    <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                    {% endif %}
+                {% endif %}
+            </article>
+        </section>
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>
+{% endblock %}

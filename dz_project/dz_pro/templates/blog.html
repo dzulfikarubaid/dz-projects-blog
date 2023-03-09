@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz.projects</title>
+    <link rel="stylesheet" href="{% static 'window/blog.css' %}">
+    <link rel="icon" href="{% static 'window/logo.png' %}" type="image/gif" sizes="30x30">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
+<body>
+    <div class="box">
+        <!-- <header>    
+            <a href="{% url 'window' %}" class="logo">dz.project</a>
+            <nav>
+                <li><a href="{% url 'write' %}">WRITE</a></li>
+                <li><a href="#">WHAT</a></li>
+                <li><a href="{% url 'register' %}"> SIGN UP </a></li>
+            </nav>
+        </header> -->
+        <section>
+            <div class="sec-1">
+                <div class="opening">
+                    <p>Improve your skills by doing projects. Build, develop and publish your project on this website.</p>
+                </div>
+                
+                    {% for post in object_list %}
+                        <article class="ai-web">
+                            <p>{{ post.first_name }} {{ post.last_name }}</p>
+                            <a href="{% url 'postview' post.pk %}">
+                                <img src="{% static 'window/web-ai.png' %}">
+                                <h3>{{ post.title }}</h3>
+                                <p>{{ post.body|safe|striptags|truncatechars:100 }}</p>       
+                            </a>
+                            <p>Category: {{ post.category }}</p>
+                            {% if user.is_authenticated %}
+                                {% if user.id == post.author.id %}
+                                    <a href="{% url 'update_post' post.pk %}">Edit</a>
+                                    <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                                {% endif %}
+                            {% endif %}
+                            <p>{{ post.post_date }}</p>
+                        </article>
+                    {% endfor %}
+                
+            </div>
+            <div class="sec-2">
+                <div class="recomendation">
+                    <h3>Recomendation</h3>
+                    
+                        {% for post in object_list %}
+                        <li><a href="{% url 'postview' post.pk %}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    
+                </div>
+            </div>
+            
+        </section>
+        <footer>
+
+        </footer>
+    </div>
+    
+</body>
+</html>
+{% endblock %}

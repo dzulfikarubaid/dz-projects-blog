@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz.projects</title>
+    <link rel="stylesheet" href="{% static 'write/write.css' %}">
+    <link rel="icon" href="{% static 'window/logo.png' %}" type="image/gif" sizes="30x30">
+</head>
+<body>
+    <div class="box">
+        {% if user.is_authenticated %}
+            <div class="form-group">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{ form.media }}
+                    <button>Publish the project</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="notauth">
+                <h3>You can write your project if you have an account.</h3>
+                <a href="{% url 'getstarted' %}">SIGN UP</a>
+            </div>
+            
+        {% endif %}
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>
+{% endblock %}
